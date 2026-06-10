@@ -121,6 +121,11 @@ class OrderViewSet(viewsets.ModelViewSet):
                 unit_price=cart_item.product.unit_price
             )
 
+        for cart_item in cart.items.all():
+            product = cart_item.product
+            product.quantity -= cart_item.quantity  
+            product.save()
+
         cart.items.all().delete()
         
         serializer = OrderSerializer(order)
