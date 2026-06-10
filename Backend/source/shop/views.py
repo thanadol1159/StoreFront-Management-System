@@ -1,11 +1,12 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 from .models import User, Product, Cart, CartItem, Order, OrderItem
 from .serializers import (
-    UserSerializer, ProductSerializer, ProductCreateSerializer,
+    UserSerializer, RegisterSerializer, ProductSerializer, ProductCreateSerializer,
     CartSerializer, CartItemSerializer, CartItemCreateSerializer,
     OrderSerializer, OrderCreateSerializer, OrderItemSerializer
 )
@@ -127,6 +128,21 @@ class OrderViewSet(viewsets.ModelViewSet):
             product.save()
 
         cart.items.all().delete()
-        
+
         serializer = OrderSerializer(order)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            'user': UserSerializer(user).data,
+            'message': 'User created successfully'
+        }, status=status.HTTP_201_CREATED)
