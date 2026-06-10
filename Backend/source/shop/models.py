@@ -2,8 +2,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
- 
- 
+
+
+def product_image_upload_path(instance, filename):
+    return f'products/{instance.seller.id}/{filename}'
+
+
 class User(AbstractUser):
     class Role(models.TextChoices):
         SELLER = "seller", "Seller"
@@ -12,6 +16,17 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=10,
         choices=Role.choices,
+    )
+ 
+    groups = models.ManyToManyField(
+        "auth.Group",
+        related_name="shop_users",
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        related_name="shop_users",
+        blank=True,
     )
  
     class Meta:
@@ -27,10 +42,6 @@ class User(AbstractUser):
     @property
     def is_buyer(self):
         return self.role == self.Role.BUYER
- 
- 
-def product_image_upload_path(instance, filename):
-    return f"products/{instance.seller_id}/{filename}"
  
  
 class Product(models.Model):
