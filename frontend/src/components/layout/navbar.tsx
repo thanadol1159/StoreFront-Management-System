@@ -43,8 +43,8 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="auth-btns">
-            <Link to="/login" className="btn-ghost">Sign in</Link>
-            <Link to="/register" className="btn-primary">Join</Link>
+            <Link to="/login" className="btn-ghost">log in</Link>
+            <Link to="/register" className="btn-primary">Sign up</Link>
           </div>
         )}
       </div>
