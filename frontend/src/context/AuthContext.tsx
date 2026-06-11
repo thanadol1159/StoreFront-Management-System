@@ -5,7 +5,7 @@ import type { User, LoginPayload, RegisterPayload } from '../types'
 interface AuthContextValue {
   user: User | null
   loading: boolean
-  login: (payload: LoginPayload) => Promise<void>
+  login: (payload: LoginPayload) => Promise<User>
   register: (payload: RegisterPayload) => Promise<void>
   logout: () => void
   isAuthenticated: boolean
@@ -34,12 +34,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
  
-  const login = async (payload: LoginPayload) => {
+  const login = async (payload: LoginPayload): Promise<User> => {
     const tokens = await authApi.login(payload)
     localStorage.setItem('access', tokens.access)
     localStorage.setItem('refresh', tokens.refresh)
     const me = await authApi.me()
     setUser(me)
+    return me
   }
  
   const register = async (payload: RegisterPayload) => {

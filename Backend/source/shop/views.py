@@ -146,3 +146,11 @@ class RegisterView(generics.CreateAPIView):
             'user': UserSerializer(user).data,
             'message': 'User created successfully'
         }, status=status.HTTP_201_CREATED)
+
+
+class MeView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user

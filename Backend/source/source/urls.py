@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from shop.views import ProductViewSet, CartViewSet, OrderViewSet, RegisterView
+from shop.views import ProductViewSet, CartViewSet, OrderViewSet, RegisterView, MeView
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet, basename='product')
@@ -28,6 +28,7 @@ router.register(r'orders', OrderViewSet, basename='order')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/users/me/', MeView.as_view(), name='me'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls)),

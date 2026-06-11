@@ -15,8 +15,13 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      await login({ username, password })
-      navigate('/')
+      const user = await login({ username, password })
+      // redirect ตาม role
+      if (user?.role === 'seller') {
+        navigate('/seller/products')
+      } else {
+        navigate('/')
+      }
     } catch {
       setError('Incorrect username or password.')
     } finally {
