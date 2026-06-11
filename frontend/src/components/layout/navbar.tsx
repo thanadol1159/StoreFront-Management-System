@@ -17,7 +17,7 @@ export default function Navbar() {
     <nav className="navbar">
       <Link to="/" className="navbar-brand">
         <span className="brand-icon">◈</span>
-        <span className="brand-name">StoreMesh</span>
+        <span className="brand-name">StoreFront Management System</span>
       </Link>
  
       <div className="navbar-actions">

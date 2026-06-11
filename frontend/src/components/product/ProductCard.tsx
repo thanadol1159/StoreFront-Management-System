@@ -9,7 +9,11 @@ interface Props {
  
 export default function ProductCard({ product }: Props) {
   const navigate = useNavigate()
-  const imageUrl = product.image ? `${API_URL}${product.image}` : null
+  const imageUrl = product.image
+  ? product.image.startsWith('http')
+    ? product.image
+    : `${API_URL}${product.image}`
+  : null
  
   return (
     <div className="product-card" onClick={() => navigate(`/products/${product.id}`)}>

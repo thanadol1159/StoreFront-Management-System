@@ -47,7 +47,11 @@ export default function ProductDetailPage() {
   if (loading) return <div className="page-loading">Loading...</div>
   if (!product) return <div className="page-error">Product not found.</div>
  
-  const imageUrl = product.image ? `${API_URL}${product.image}` : null
+  const imageUrl = product.image
+  ? product.image.startsWith('http')
+    ? product.image
+    : `${API_URL}${product.image}`
+  : null
  
   return (
     <div className="page-product-detail">

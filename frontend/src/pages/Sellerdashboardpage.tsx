@@ -69,7 +69,11 @@ export default function SellerDashboardPage() {
           </div>
  
           {products.map((p) => {
-            const imageUrl = p.image ? `${API_URL}${p.image}` : null
+            const imageUrl = p.image
+              ? p.image.startsWith('http')
+                ? p.image
+                : `${API_URL}${p.image}`
+              : null
             return (
               <div key={p.id} className="seller-product-row">
                 <div className="seller-product-info">
