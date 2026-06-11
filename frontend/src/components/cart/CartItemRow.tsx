@@ -14,7 +14,11 @@ export default function CartItemRow({ item }: Props) {
   const { fetchCart } = useCart()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const imageUrl = item.product.image ? `${API_URL}${item.product.image}` : null
+  const imageUrl = item.product.image
+    ? item.product.image.startsWith('http')
+      ? item.product.image
+      : `${API_URL}${item.product.image}`
+    : null
  
   const handleQuantityChange = async (delta: number) => {
     const newQty = item.quantity + delta
