@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { productApi } from '../api/services'
  
-const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8080'
+const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://127.0.0.1:8000'
  
 interface FormState {
   title: string

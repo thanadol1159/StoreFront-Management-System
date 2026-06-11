@@ -4,7 +4,7 @@ import { productApi } from '../api/services'
 import { useAuth } from '../context/AuthContext'
 import type { Product } from '../types'
  
-const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8080'
+const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://127.0.0.1:8000'
  
 export default function SellerDashboardPage() {
   const { user } = useAuth()

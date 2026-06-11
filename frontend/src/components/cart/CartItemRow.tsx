@@ -4,7 +4,7 @@ import { cartApi } from '../../api/services'
 import type { CartItem } from '../../types'
 import { useState } from 'react'
  
-const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8080'
+const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://127.0.0.1:8000'
  
 interface Props {
   item: CartItem
