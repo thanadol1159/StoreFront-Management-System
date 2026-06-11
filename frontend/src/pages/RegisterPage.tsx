@@ -30,7 +30,7 @@ export default function RegisterPage() {
       <div className="auth-card">
         <div className="auth-header">
           <span className="brand-icon large">◈</span>
-          <h1>Join StoreMesh</h1>
+          <h1>Sign up to StoreFront</h1>
         </div>
  
         <form onSubmit={handleSubmit} className="auth-form">
@@ -93,7 +93,7 @@ export default function RegisterPage() {
         </form>
  
         <p className="auth-switch">
-          Already have an account? <Link to="/login">Sign in</Link>
+          Already have an account? <Link to="/login">log in</Link>
         </p>
       </div>
     </div>

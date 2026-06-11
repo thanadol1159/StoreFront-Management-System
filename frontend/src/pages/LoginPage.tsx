@@ -34,7 +34,7 @@ export default function LoginPage() {
       <div className="auth-card">
         <div className="auth-header">
           <span className="brand-icon large">◈</span>
-          <h1>Sign in to StoreMesh</h1>
+          <h1>Log in to StoreFront</h1>
         </div>
  
         <form onSubmit={handleSubmit} className="auth-form">
@@ -69,7 +69,7 @@ export default function LoginPage() {
         </form>
  
         <p className="auth-switch">
-          Don't have an account? <Link to="/register">Join StoreMesh</Link>
+          Don't have an account? <Link to="/register">Sign up</Link>
         </p>
       </div>
     </div>
