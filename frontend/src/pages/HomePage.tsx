@@ -17,15 +17,31 @@ export default function HomePage() {
       .finally(() => setLoading(false))
   }, [sortBy])
  
-  const filtered = useMemo(() => {
-    return products.filter((p) => {
-      const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) ||
-        p.description.toLowerCase().includes(search.toLowerCase())
-      const matchStock = inStockOnly ? p.in_stock : true
-      return matchSearch && matchStock
-    })
-  }, [products, search, inStockOnly])
- 
+const filtered = useMemo(() => {
+  let result = products.filter((p) => {
+    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) ||
+      p.description.toLowerCase().includes(search.toLowerCase())
+    const matchStock = inStockOnly ? p.in_stock : true
+    return matchSearch && matchStock
+  })
+
+  result = [...result].sort((a, b) => {
+    switch (sortBy) {
+      case 'unit_price':
+        return Number(a.unit_price) - Number(b.unit_price)
+      case '-unit_price':
+        return Number(b.unit_price) - Number(a.unit_price)
+      case 'created_at':
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      case '-created_at':
+      default:
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    }
+  })
+
+  return result
+}, [products, search, inStockOnly, sortBy])
+
   return (
     <div className="page-home">
       <section className="home-hero">
