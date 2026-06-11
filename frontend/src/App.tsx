@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage'
 import OrderConfirmPage from './pages/OrderConfirmPage'
 import SellerDashboardPage from './pages/Sellerdashboardpage'
 import ProductFormPage from './pages/Productformpage'
+import OrderHistoryPage from './pages/OrderHistoryPage'
 import './App.css'
  
 function Layout({ children }: { children: React.ReactNode }) {
@@ -38,6 +39,7 @@ export default function App() {
               {/* Buyer */}
               <Route path="/cart" element={<CartPage />} />
               <Route path="/orders/:id" element={<OrderConfirmPage />} />
+              <Route path="/orders" element={<OrderHistoryPage />} />
  
               {/* Seller */}
               <Route path="/seller/products" element={

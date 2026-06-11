@@ -36,6 +36,9 @@ export default function Navbar() {
             {user?.role === 'seller' && (
               <Link to="/seller/products" className="btn-ghost">My Products</Link>
             )}
+            {user?.role === 'buyer' && (
+              <Link to="/orders" className="btn-ghost">My Orders</Link>
+            )}
             <button className="btn-ghost" onClick={handleLogout}>Sign out</button>
           </div>
         ) : (
