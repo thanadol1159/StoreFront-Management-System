@@ -6,7 +6,7 @@ import type { Role } from '../types'
 export default function RegisterPage() {
   const { register } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ username: '', email: '', password: '', role: 'buyer' as Role })
+  const [form, setForm] = useState({ username: '', email: '', password: '', password2: '', role: 'buyer' as Role })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
  
@@ -81,6 +81,17 @@ export default function RegisterPage() {
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
+              required
+            />
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="password2">confirm Password</label>
+            <input
+              id="password2"
+              type="password"
+              value={form.password2}
+              onChange={(e) => setForm({ ...form, password2: e.target.value })}
               required
             />
           </div>
